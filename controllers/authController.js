@@ -34,8 +34,25 @@ exports.register = async (req, res) => {
         await user.save();
 
         await transporter.sendMail({
-            from: ''
-        })
+            from: 'tewodrosshimels268@gmail.com',
+            to: email,
+            subject: 'otp verification',
+            text: `your OTP is: ${otp}`
+
+        });
+
+        res.status(201).json({ message: 'user Register, please verify OTP sent to email.'});
+    } catch(error){
+        res.status(500). json({ message: 'Error registering user', error});
+    }
+};
+
+// verify OTP
+
+exports.verifyOTP = async (req,res) => {
+    try{
+        
     }
 }
+
 
