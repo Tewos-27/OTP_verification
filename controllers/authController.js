@@ -51,8 +51,25 @@ exports.register = async (req, res) => {
 
 exports.verifyOTP = async (req,res) => {
     try{
-        
-    }
-}
+        const { email, otp} = req.body;
+        const user = await user.findOne({ email });
+
+        if (!user) return res.status(400).json({ message: ' user not found '});
+        if (user.isVerified) return res.status(400).json({ message: 'user already verified'});
+
+        if (user.otp !== otp || user.otpExpiry < new Date()){
+            return res.status(400).json({ message: 'Invalid or expired OTP'});
+        }
+
+        user.isVerified = true;
+        user.otp = undefined;
+        user.otpExpiry = undefined;
+        await user.save();
+
+        res.json({ message: 'Email verified successfully. you can login!'});
+    } catch (error){
+       res.status(500).json({ message: 'Error verifi\ying OTP', error});
+    } 
+};
 
 
