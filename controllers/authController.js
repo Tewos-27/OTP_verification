@@ -72,4 +72,4 @@ exports.verifyOTP = async (req,res) => {
     } 
 };
 
-
+// Resend OTP
