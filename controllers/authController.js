@@ -78,6 +78,7 @@ exports.resendOTP = async (req, res) => {
         const { email } = req.body;
         const user = await User.findOne({ email });
 
-        
+        if (!user) return res.status(400).json({ message: 'user not found!'});
+        if (user.IsVerified) return res.status(400).json({ message: 'User alerady verified!'});
     }
 }
