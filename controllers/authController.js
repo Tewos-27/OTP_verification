@@ -80,5 +80,9 @@ exports.resendOTP = async (req, res) => {
 
         if (!user) return res.status(400).json({ message: 'user not found!'});
         if (user.IsVerified) return res.status(400).json({ message: 'User alerady verified!'});
+
+        const otp = generateOTP();
+        user.otp = otp;
+        user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
     }
 }
