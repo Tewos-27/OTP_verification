@@ -93,5 +93,7 @@ exports.resendOTP = async (req, res) => {
             text: `Your new OTP is: ${otp}`
         });  
         res.json({ message: 'OTP resent successfully'});
+    } catch (error){
+        res.status(500).json({ message: 'Error resending OTP', error});
     }
-}
+};
