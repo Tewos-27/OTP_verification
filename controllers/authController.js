@@ -84,5 +84,7 @@ exports.resendOTP = async (req, res) => {
         const otp = generateOTP();
         user.otp = otp;
         user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+
+        await.
     }
 }
