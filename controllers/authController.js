@@ -107,5 +107,16 @@ exports.login = async (req, res) => {
       if(!user)
         return res.status(400).json({ message: 'User not found'});
       if(user.password !== password) return res.status(400).json({ message: 'Incorrect password'});
+
+      if (!user.IsVerified){
+        return res.status(400).json({ message: 'Email is not verified. Pleasse verify OTP '});
+      }
+
+      req.session.user = { id: user._id, email: user.email, name: user.name};
+      res.json({ messsage: 'Login successful'});
+
+    } catch(error){
+        res.status(500).json({ message: 'Error logging in', error });
     }
+    
 }
