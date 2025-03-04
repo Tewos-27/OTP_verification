@@ -85,6 +85,14 @@ exports.resendOTP = async (req, res) => {
         user.otp = otp;
         user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
-        await.
+        await user.save();
+        await transporter.sendMail({
+            from: 'tewodrosshimels51@gmail.com',
+            to: email,
+            subject: ' Resend OTP Verivication',
+            text: `Your new OTP is: ${otp}`
+        });
+
+        
     }
 }
