@@ -91,8 +91,7 @@ exports.resendOTP = async (req, res) => {
             to: email,
             subject: ' Resend OTP Verivication',
             text: `Your new OTP is: ${otp}`
-        });
-
-        
+        });  
+        res.json({ message: 'OTP resent successfully'});
     }
 }
