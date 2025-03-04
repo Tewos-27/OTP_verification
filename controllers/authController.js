@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'tewodrosshimels268@gmail.com',
-        pass: 'Tewo@1921'
+        pass: ''
     }
 })
 
@@ -119,4 +119,18 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'Error logging in', error });
     }
     
+};
+
+// Logout user 
+exports.logout = (req, res) => {
+    req.session.destroy((err) => {
+        if(err) return res.status(500).json({ message: 'Error logging out'});
+        res.json({ message: 'Logged out successfully'});
+    });
+
+};
+
+// Dashboard (protected route)
+exports.dashboard = async (req, res) => {
+    res.json({ message: ` welcome to the dashboard, ${req.session.user.name}`});
 }
