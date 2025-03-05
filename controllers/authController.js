@@ -2,25 +2,22 @@ const User = require('../models/User');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
-
 // email transporter setup
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'tewodrosshimels268@gmail.com',
+        user: 'tewodrosshimels54@gmail.com',
         pass: ''
     }
 })
 
 // generate OTP
-
 const generateOTP = () => crypto.randomInt(100000, 999999).toString();
 
 // register User and send Otp
-
 exports.register = async (req, res) => {
     try{
-
+        
         const { name, email, password } =req.body;
         let user = await User.findOne({ email });
 
@@ -30,7 +27,6 @@ exports.register = async (req, res) => {
         const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
         user = new User({ name, email, password, otp, otpExpiry});
-
         await user.save();
 
         await transporter.sendMail({
@@ -40,15 +36,12 @@ exports.register = async (req, res) => {
             text: `your OTP is: ${otp}`
 
         });
-
         res.status(201).json({ message: 'user Register, please verify OTP sent to email.'});
     } catch(error){
         res.status(500). json({ message: 'Error registering user', error});
     }
 };
-
 // verify OTP
-
 exports.verifyOTP = async (req,res) => {
     try{
         const { email, otp} = req.body;
@@ -87,7 +80,7 @@ exports.resendOTP = async (req, res) => {
 
         await user.save();
         await transporter.sendMail({
-            from: 'tewodrosshimels51@gmail.com',
+            from: 'tewodrosshimels54@gmail.com',
             to: email,
             subject: ' Resend OTP Verivication',
             text: `Your new OTP is: ${otp}`
@@ -129,8 +122,7 @@ exports.logout = (req, res) => {
     });
 
 };
-
 // Dashboard (protected route)
 exports.dashboard = async (req, res) => {
-    res.json({ message: ` welcome to the dashboard, ${req.session.user.name}`});
+    res.json({ message: `welcome to the dashboard, ${req.session.user.name}`});
 }
