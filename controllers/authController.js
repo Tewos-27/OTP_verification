@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'tewodrosshimels54@gmail.com',
+        user: 'tewodrosshimels268@gmail.com',
         pass: ''
     }
 })
@@ -80,7 +80,7 @@ exports.resendOTP = async (req, res) => {
 
         await user.save();
         await transporter.sendMail({
-            from: 'tewodrosshimels54@gmail.com',
+            from: 'tewodrosshimels268@gmail.com',
             to: email,
             subject: ' Resend OTP Verivication',
             text: `Your new OTP is: ${otp}`
