@@ -120,8 +120,8 @@ exports.logout = (req, res) => {
         if(err) return res.status(500).json({ message: 'Error logging out'});
         res.json({ message: 'Logged out successfully'});
     });
-
 };
+
 // Dashboard (protected route)
 exports.dashboard = async (req, res) => {
     res.json({ message: `welcome to the dashboard, ${req.session.user.name}`});
