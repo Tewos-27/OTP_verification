@@ -14,6 +14,7 @@ app.use(session({
     saveUninitialized: true,  // Fixed typo
     cookie: { secure: false }
 }));
+
 // Middleware to log requests
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
