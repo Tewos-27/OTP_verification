@@ -15,6 +15,11 @@ const transporter = nodemailer.createTransport({
 const generateOTP = () => crypto.randomInt(100000, 999999).toString();
 
 // register User and send Otp
+// This function handles user registration and sends an OTP to the user's email for verification
+// It first checks if the user already exists in the database by searching for the email
+// If the user exists, it returns a 400 status with an error message
+// If the user does not exist, it generates a new OTP and sets an expiry time for the OTP
+
 exports.register = async (req, res) => {
     try{
         
