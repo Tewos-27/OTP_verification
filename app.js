@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const session = require('express-session');
+
 // Connect to MongoDB
 connectDB();
 
@@ -13,11 +14,11 @@ app.use(session({
     saveUninitialized: true,  // Fixed typo
     cookie: { secure: false }
 }));
-
+// Middleware to log requests
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
-
 const PORT = 3000;
+
 app.listen(PORT, () => 
     console.log(`Server running on port ${PORT}`)  // Fixed template string
 );
