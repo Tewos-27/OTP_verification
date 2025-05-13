@@ -6,17 +6,17 @@ const MONGO_URL = "mongodb+srv://tewodrosshimels54:0Um2fZoyVxGTkuzT@cluster0.6qb
 const connectDB = async () => {
     try {
         await mongoose.connect(MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
+            // You can remove these deprecated options
+            // useNewUrlParser: true,
+            // useUnifiedTopology: true
         });
 
         console.log('MongoDb Connected Successfully!!');
-        // Create the empty user collection
+        // Remove this line:
+        // await User.createCollection();
+        // console.log('User collection created successfully');
 
-        await User.createCollection();
-        console.log('User collection created successfully');
-
-    }catch (err) {
+    } catch (err) {
         console.error('MongoDB Connection Failed:', err.message);
         process.exit(1); //Exit the process with failure
 
