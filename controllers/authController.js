@@ -109,7 +109,6 @@ exports.login = async (req, res) => {
 
       if(!user)
         return res.status(400).json({ message: 'User not found'});
-    
       if (!await bcrypt.compare(password, user.password)) {
         return res.status(400).json({ message: 'Incorrect password' });
       }
@@ -137,5 +136,8 @@ exports.logout = (req, res) => {
 
 // Dashboard (protected route)
 exports.dashboard = async (req, res) => {
-    res.json({ message: `welcome to the dashboard, ${req.session.user.name}`});
-}
+    if (!req.session || !req.session.user) {
+        return res.status(401).json({ message: 'Unauthorized access' });
+    }
+    res.json({ message: `Welcome to the dashboard, ${req.session.user.name}` });
+};
