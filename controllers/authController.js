@@ -99,6 +99,8 @@ exports.resendOTP = async (req, res) => {
 };
 
 // Login user 
+// This function handles user login
+// It first checks if the user exists in the database by searching for the email
 exports.login = async (req, res) => {
     try{
       const { email, password } = req.body;
