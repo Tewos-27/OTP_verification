@@ -2,15 +2,15 @@ const User = require('../models/User');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
-
+const dotenv = require('dotenv');
 // email transporter setup
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'tewodrosshimels268@gmail.com',
-        pass: 'dudzastyiponbepe'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
-})
+});
 
 // generate OTP
 const generateOTP = () => crypto.randomInt(100000, 999999).toString();
@@ -80,7 +80,7 @@ exports.resendOTP = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) return res.status(400).json({ message: 'user not found!'});
-        if (user.IsVerified) return res.status(400).json({ message: 'User alerady verified!'});
+        if (user.isVerified) return res.status(400).json({ message: 'User already verified!' });
 
         const otp = generateOTP();
         user.otp = otp;
