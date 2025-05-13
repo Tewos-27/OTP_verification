@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 // email transporter setup
 const transporter = nodemailer.createTransport({
@@ -52,10 +53,10 @@ exports.register = async (req, res) => {
 exports.verifyOTP = async (req,res) => {
     try{
         const { email, otp} = req.body;
-        const user = await user.findOne({ email });
+        const user = await User.findOne({ email });
 
         if (!user) return res.status(400).json({ message: ' user not found '});
-        if (user.isVerified) return res.status(400).json({ message: 'user already verified'});
+        if (user.isVerified) return res.status(400).json({ message: 'User already verified!' });
 
         if (user.otp !== otp || user.otpExpiry < new Date()){
             return res.status(400).json({ message: 'Invalid or expired OTP'});
@@ -108,7 +109,10 @@ exports.login = async (req, res) => {
 
       if(!user)
         return res.status(400).json({ message: 'User not found'});
-      if(user.password !== password) return res.status(400).json({ message: 'Incorrect password'});
+    
+      if (!await bcrypt.compare(password, user.password)) {
+        return res.status(400).json({ message: 'Incorrect password' });
+      }
 
       if (!user.IsVerified){
         return res.status(400).json({ message: 'Email is not verified. Pleasse verify OTP '});
