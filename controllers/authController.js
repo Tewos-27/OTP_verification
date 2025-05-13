@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
+
 // email transporter setup
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -90,7 +91,7 @@ exports.resendOTP = async (req, res) => {
         await transporter.sendMail({
             from: 'tewodrosshimels268@gmail.com',
             to: email,
-            subject: ' Resend OTP Verivication',
+            subject: ' Resend OTP Verification',
             text: `Your new OTP is: ${otp}`
         });  
         res.json({ message: 'OTP resent successfully'});
