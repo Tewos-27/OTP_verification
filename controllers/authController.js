@@ -107,6 +107,8 @@ exports.resendOTP = async (req, res) => {
 // Login user 
 // This function handles user login
 // It first checks if the user exists in the database by searching for the email
+// If the user does not exist, it returns a 400 status with an error message
+// If the user exists, it checks if the password is correct by comparing the hashed password in the database with the provided password
 exports.login = async (req, res) => {
     try{
       const { email, password } = req.body;
