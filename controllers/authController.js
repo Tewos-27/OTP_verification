@@ -51,6 +51,7 @@ exports.register = async (req, res) => {
 // verify OTP
 // This function verifies the OTP sent to the user's email
 // It first checks if the user exists in the database by searching for the email
+
 exports.verifyOTP = async (req,res) => {
     try{
         const { email, otp} = req.body;
@@ -75,6 +76,9 @@ exports.verifyOTP = async (req,res) => {
 };
 
 // Resend OTP
+// This function resends the OTP to the user's email
+// It first checks if the user exists in the database by searching for the email
+// If the user does not exist, it returns a 400 status with an error message
 exports.resendOTP = async (req, res) => {
     try{
         const { email } = req.body;
