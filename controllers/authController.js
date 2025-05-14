@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 
 // email transporter setup
+// This code sets up a transporter for sending emails using nodemailer
+// It uses the Gmail service and authenticates with the user's email and password
+dotenv.config();
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -14,6 +17,8 @@ const transporter = nodemailer.createTransport({
 });
 
 // generate OTP
+// This function generates a random 6-digit OTP (One Time Password) using the crypto module
+// It uses the randomInt method to generate a random integer between 100000 and 999999
 const generateOTP = () => crypto.randomInt(100000, 999999).toString();
 
 // register User and send Otp
