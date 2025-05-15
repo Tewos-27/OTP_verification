@@ -138,6 +138,10 @@ exports.login = async (req, res) => {
     
 };
 // Logout user 
+// This function handles user logout
+// It destroys the session and sends a success message
+// It first checks if the user exists in the session
+// If the user does not exist, it returns a 401 status with an error message
 exports.logout = (req, res) => {
     req.session.destroy((err) => {
         if(err) return res.status(500).json({ message: 'Error logging out'});
