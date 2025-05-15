@@ -7,6 +7,7 @@ const authMiddleware = require('../middleware/authmiddleware');
 
 const router = express.Router();
  // This code defines the routes for user authentication
+//  The routes include registration, OTP verification, login, logout, and dashboard access
 router.post('/register', register);
 router.post('/verify-otp', verifyOTP);
 router.post('/resend-otp', resendOTP);
