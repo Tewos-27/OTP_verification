@@ -40,7 +40,8 @@ exports.register = async (req, res) => {
 
         user = new User({ name, email, password, otp, otpExpiry});
         await user.save();
-
+// hash password
+// 
         await transporter.sendMail({
             from: 'tewodrosshimels268@gmail.com',
             to: email,
@@ -114,17 +115,18 @@ exports.resendOTP = async (req, res) => {
 // It first checks if the user exists in the database by searching for the email
 // If the user does not exist, it returns a 400 status with an error message
 // If the user exists, it checks if the password is correct by comparing the hashed password in the database with the provided password
+
 exports.login = async (req, res) => {
     try{
       const { email, password } = req.body;
       const user = await User.findOne({ email });
-
+// check if user exists
       if(!user)
         return res.status(400).json({ message: 'User not found'});
       if (!await bcrypt.compare(password, user.password)) {
         return res.status(400).json({ message: 'Incorrect password' });
       }
-
+// check if user is verified
       if (!user.IsVerified){
         return res.status(400).json({ message: 'Email is not verified. Pleasse verify OTP '});
       }
