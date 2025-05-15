@@ -14,5 +14,6 @@ router.post('/resend-otp', resendOTP);
 router.post('/login', login);
 router.post('/logout', logout);
 router.get('/dashboard', authMiddleware, dashboard);
-
+// This code defines a middleware function called authMiddleware
+// This code exports the router object so it can be used in other parts of the application
 module.exports = router;
