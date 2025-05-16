@@ -156,6 +156,8 @@ exports.logout = (req, res) => {
 // This function handles the dashboard route
 // It checks if the user is authenticated by checking if the user object exists in the session
 exports.dashboard = async (req, res) => {
+    // Check if the user is authenticated
+    // This code checks if the user is authenticated by checking if the session exists and if the user object is present in the session
     if (!req.session || !req.session.user) {
         return res.status(401).json({ message: 'Unauthorized access' });
     }
