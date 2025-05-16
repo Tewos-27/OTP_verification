@@ -96,7 +96,7 @@ exports.resendOTP = async (req, res) => {
         const otp = generateOTP();
         user.otp = otp;
         user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
+    //    save the new OTP and expiry time to the database
         await user.save();
         await transporter.sendMail({
             from: 'tewodrosshimels268@gmail.com',
