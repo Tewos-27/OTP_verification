@@ -37,7 +37,7 @@ exports.register = async (req, res) => {
         
         const otp = generateOTP();
         const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
+        
         user = new User({ name, email, password, otp, otpExpiry});
         await user.save();
 
@@ -61,7 +61,7 @@ exports.verifyOTP = async (req,res) => {
     try{
         const { email, otp} = req.body;
         const user = await User.findOne({ email });
-
+        // check if user exists
         if (!user) return res.status(400).json({ message: ' user not found '});
         if (user.isVerified) return res.status(400).json({ message: 'User already verified!' });
 
