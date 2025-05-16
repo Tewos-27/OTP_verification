@@ -32,7 +32,7 @@ exports.register = async (req, res) => {
         
         const { name, email, password } =req.body;
         let user = await User.findOne({ email });
-
+        // check if user already exists
         if (user) return res.status(400).json({ message: 'User already exists'});
         
         const otp = generateOTP();
@@ -40,8 +40,7 @@ exports.register = async (req, res) => {
 
         user = new User({ name, email, password, otp, otpExpiry});
         await user.save();
-// hash password
-// 
+
         await transporter.sendMail({
             from: 'tewodrosshimels268@gmail.com',
             to: email,
@@ -127,6 +126,7 @@ exports.login = async (req, res) => {
         return res.status(400).json({ message: 'Incorrect password' });
       }
 // check if user is verified
+
       if (!user.IsVerified){
         return res.status(400).json({ message: 'Email is not verified. Pleasse verify OTP '});
       }
