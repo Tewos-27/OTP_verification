@@ -17,6 +17,8 @@ app.use(session({
 
 // Middleware to log requests
 const authRoutes = require('./routes/authRoutes');
+// This code imports the authRoutes module, which contains the routes for user authentication
+// It uses the express.Router() method to create a new router object
 app.use('/api/auth', authRoutes);
 const PORT = 3000;
 
