@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/User'); // Import the user model
 
 const MONGO_URL = "mongodb+srv://tewodrosshimels54:0Um2fZoyVxGTkuzT@cluster0.6qbzy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
+// This is the connection string for MongoDB Atlas
 const connectDB = async () => {
     try {
         await mongoose.connect(MONGO_URL, {
