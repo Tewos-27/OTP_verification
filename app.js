@@ -21,7 +21,8 @@ const authRoutes = require('./routes/authRoutes');
 // It uses the express.Router() method to create a new router object
 app.use('/api/auth', authRoutes);
 const PORT = 3000;
-
+// This code starts the server and listens on the specified port
+// It uses the app.listen() method to bind the server to the port and start listening for incoming requests
 app.listen(PORT, () => 
     console.log(`Server running on port ${PORT}`)  // Fixed template string
 );
