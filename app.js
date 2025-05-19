@@ -7,7 +7,7 @@ connectDB();
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON
-
+// Middleware to parse URL-encoded data
 app.use(session({
     secret: 'supersecretkey',
     resave: false,
